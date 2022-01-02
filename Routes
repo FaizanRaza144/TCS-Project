@@ -1,0 +1,91 @@
+import express from 'express';
+
+const result = [{
+    "id": 1,
+    "student_name": "Faizan",
+    "marks": 89
+},
+{
+    "id": 2,
+    "student_name": "Umair",
+    "marks": 85
+},
+{
+    "id": 1,
+    "student_name": "Shaheer",
+    "marks": 88
+},
+{
+    "id": 1,
+    "student_name": "Nouman",
+    "marks": 70
+},
+{
+    "id": 1,
+    "student_name": "Ali",
+    "marks": 91
+},
+];
+const  Teachers =  [
+    {
+        TeacherID: "FromUsertable",
+        Name: "Faizan",
+        Age: 35,
+        Salary: 59000,
+        Gender: "M",
+        Contact: 03254167,
+        email: "faizan@comsats.edu.pk"
+    },
+{
+        TeacherID: "FromUsertable",
+        Name: "Ali",
+        Age: 25,
+        Salary: 69000,
+        Gender: "M",
+        Contact: 032541657,
+        email: "ali@comsats.edu.pk",
+    },
+{
+        TeacherID: "FromUsertable",
+        Name: "Umair",
+        Age: 50,
+        Salary: 99000,
+        Gender: "M",
+        Contact: 03521654,
+        email: "umair@comsats.edu.pk",
+    }
+]
+
+var url = 'mongodb://localhost:27017/database';
+
+const App = express();
+
+App.listen(3000,()=>{
+console.log("App is working fine");
+})
+
+App.get('/result',(req,res)=>{
+    res.json(result[id]);
+})
+App.put('/marks',(req,res)=>{
+  const id = req.params.id
+  const student_name = req.body.student_name
+  const marks = req.body.marks
+
+  const index = result.findIndex((resul)=>{
+    return resul.id==id
+
+  })
+  if(index>0){
+    const res1 = result[index]
+    res1.student_name = student_name
+    res1.marks = marks
+    res.json(res1)
+  }
+  else{
+    res.status(404)
+  }
+})
+App.get('/dashboard',(req,res)=>{
+  res.json(result);
+})
